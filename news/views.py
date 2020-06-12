@@ -19,6 +19,6 @@ def news_list(request):
     return render(request,'back/news_list.html',{'news':news})
 
 def add_news(request):
-    
+    print('okokokokokokoko')
     return render(request,'back/add_news.html')
 
