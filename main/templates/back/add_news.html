@@ -1,0 +1,131 @@
+
+{% extends 'back/master.html' %}
+{% load static %}
+
+                    {% block blockmain %}
+                    
+                        <!-- Datatables Header -->
+                        <div class="content-header">
+                            <div class="header-section">
+                                <h1>
+                                    <i class="fa fa-table"></i>Add News<br><small>You can add news here!</small>
+                                </h1>
+                            </div>
+                        </div>
+                        <ul class="breadcrumb breadcrumb-top">
+                            <li>Add</li>
+                            <li><a href="/panel/news/add/">News</a></li>
+                        </ul>
+                        <!-- END Datatables Header -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Basic Form Elements Block -->
+                                <div class="block">
+                                    <!-- Basic Form Elements Title -->
+                                    <div class="block-title">
+                                       
+                                        <h2><strong>Add</strong> News</h2>
+                                    </div>
+                                    <!-- END Form Elements Title -->
+
+                                    <!-- Basic Form Elements Content -->
+                                    <form action="page_forms_general.html" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                                        
+
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" placeholder="title">
+                                            </div>
+                                            <div class="col-md-6">
+                                                
+                                            
+                                            <select id="example-chosen" name="example-chosen" class="select-chosen" data-placeholder="Choose a Category.." style="width: 250px;">
+                                                <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                                               
+                                                <option value="Category1">Category1</option>
+                                                <option value=" Category2"> Category2</option>
+                                                <option value="Category3">Category3</option>
+                                                <option value="Category4">Category4</option>
+                                                <option value="Category5">Category5</option>
+                                            </select>
+                                        </div></div>
+                                        
+
+                                            <div class="form-group">
+                                            <div class="col-md-12">
+                                                <textarea type="text" class="form-control" rows="6" placeholder="desc"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <textarea type="text" class="form-control" rows="6" placeholder="text news"></textarea>
+                                            </div>
+                                        </div>
+
+
+                                    <div class="form-group">
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Envoyer</button> 
+                                        </div>
+                                         <div class="col-md-3">
+                                             <button type="reset" class="btn btn-sm btn-warning"><i class="fa fa-repeat"></i> Annuler</button>                                        </div>
+                                        </div>
+                                    </div>
+
+                                        
+
+
+                                        
+                                       
+                                       
+                                    
+                                    </form>
+                                    <!-- END Basic Form Elements Content -->
+                                </div>
+                                <!-- END Basic Form Elements Block -->
+                            </div>
+                            <div class="col-md-6">
+                                <!-- Horizontal Form Block -->
+                               
+                                <!-- END Horizontal Form Block -->
+
+                                <!-- Normal Form Block -->
+                              
+                                <!-- END Normal Form Block -->
+
+                                <!-- Inline Form Block -->
+                               
+                                <!-- END Inline Form Block -->
+
+                                <!-- Input Sizes Block -->
+                                
+                                <!-- END Input Sizes Block -->
+                            </div>
+                        </div>
+                        
+
+                          <!-- Datatables Content -->
+                          
+
+                            
+
+                            <div class="table-responsive">
+                              
+                       
+
+                        </div>
+                        <!-- END Datatables Content -->
+                    
+                    <!-- END Page Content -->
+                                    {% endblock %}
+                    {% block footerblock %}
+                                    <!-- Load and execute javascript code used only in this page -->
+                     
+                     <script src="{% static 'backjs/pages/tablesDatatables.js' %}"></script>
+        <script>$(function(){ TablesDatatables.init(); });</script>
+
+
+                    {% endblock%}
+                       
+                   
