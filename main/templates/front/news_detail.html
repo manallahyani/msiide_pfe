@@ -51,7 +51,7 @@
                             
 
 							<h3 class="f1-l-3 cl2 p-b-16 p-t-33 respon2">
-                                {{i.desc}}
+                                {{i.desc|safe}}
                             </h3>
 							
 							<div class="flex-wr-s-s p-b-40">
@@ -81,7 +81,7 @@
 							</div>
 
 							<p align='justify'class="f1-s-11 cl6 p-b-25">
-                                {{i.txt_body}}
+                                {{i.txt_body|safe}}
 							</p>
 
                             {% endfor %}

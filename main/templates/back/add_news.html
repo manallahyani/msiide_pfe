@@ -1,7 +1,9 @@
 
 {% extends 'back/master.html' %}
 {% load static %}
-
+        {% block headblock %}
+        <script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+        {% endblock %}
                     {% block blockmain %}
                     
                         <!-- Datatables Header -->
@@ -41,28 +43,26 @@
                                             
                                             <select id="newscat" name="newscat" class="select-chosen" data-placeholder="Choose a Category.." style="width: 250px;">
                                                 <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
-                                               
-                                                <option value="Category1">Category1</option>
-                                                <option value=" Category2"> Category2</option>
-                                                <option value="Category3">Category3</option>
-                                                <option value="Category4">Category4</option>
-                                                <option value="Category5">Category5</option>
+                                               {% for i in cat %}
+                                                <option value="{{i.pk}}">{{i.catname}}| {{i.name}}</option>
+                                                {% endfor %}
                                             </select>
                                         </div></div>
                                         
 
                                             <div class="form-group">
                                             <div class="col-md-12">
-                                                <textarea id="newsdesc" name="newsdesc" type="text" class="form-control" rows="6" placeholder="desc"></textarea>
+                                                <textarea id="newsdesc" name="newsdesc" type="text" class="form-control" rows="6" placeholder="desc">Description</textarea>
                                             </div>
                                         </div>
+                                        <script> CKEDITOR.replace( "newsdesc" );</script>
 
                                         <div class="form-group">
                                             <div class="col-md-12">
-                                                <textarea id="newstxt" name="newstxt" type="text" class="form-control" rows="6" placeholder="text news"></textarea>
+                                                <textarea id="newstxt" name="newstxt" type="text" class="form-control" rows="6" placeholder="text news">Body Text</textarea>
                                             </div>
                                         </div>
-                                        
+                                        <script> CKEDITOR.replace( "newstxt" );</script>
                                         <div class="form-group">
                                             <div class="col-md-6">
                                                 <input id="myfile" name="myfile" type="file" rows="4" class="form-control" rows="6" placeholder="No file Chosen"></input>
@@ -91,44 +91,13 @@
                                 </div>
                                 <!-- END Basic Form Elements Block -->
                             </div>
-                            <div class="col-md-6">
-                                <!-- Horizontal Form Block -->
-                               
-                                <!-- END Horizontal Form Block -->
-
-                                <!-- Normal Form Block -->
-                              
-                                <!-- END Normal Form Block -->
-
-                                <!-- Inline Form Block -->
-                               
-                                <!-- END Inline Form Block -->
-
-                                <!-- Input Sizes Block -->
-                                
-                                <!-- END Input Sizes Block -->
-                            </div>
-                        </div>
-                        
-
-                          <!-- Datatables Content -->
-                          
-
                             
-
-                            <div class="table-responsive">
-                              
-                       
-
-                        </div>
-                        <!-- END Datatables Content -->
-                    
                     <!-- END Page Content -->
                                     {% endblock %}
                     {% block footerblock %}
                                     <!-- Load and execute javascript code used only in this page -->
                      
-                     <script src="{% static 'backjs/pages/tablesDatatables.js' %}"></script>
+                     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
         <script>$(function(){ TablesDatatables.init(); });</script>
 
 
