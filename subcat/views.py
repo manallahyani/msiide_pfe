@@ -4,12 +4,20 @@ from cat.models import Cat
 
 
 def subcat_list(request):
+     #login check start
+    if not request.user.is_authenticated:
+        return redirect('mylogin')
+    #login check end
     subcat=SubCat.objects.all()
     return render(request,'back/subcat_list.html',{'subcat':subcat})
 
 
 
 def add_subcat(request):
+     #login check start
+    if not request.user.is_authenticated:
+        return redirect('mylogin')
+    #login check end
     cat=Cat.objects.all()
     if request.method=='POST':
         name=request.POST.get('name')

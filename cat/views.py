@@ -3,11 +3,19 @@ from .models import Cat
 
 
 def cat_list(request):
+     #login check start
+    if not request.user.is_authenticated:
+        return redirect('mylogin')
+    #login check end
     cat=Cat.objects.all()
     return render(request,'back/cat_list.html',{'cat':cat})
 
 
 def add_cat(request):
+     #login check start
+    if not request.user.is_authenticated:
+        return redirect('mylogin')
+    #login check end
     if request.method=='POST':
         name=request.POST.get('name')
         if name=="":

@@ -4,6 +4,7 @@ from main.models import Main
 import datetime
 from django.core.files.storage import FileSystemStorage
 from subcat.models import SubCat
+from cat.models import Cat
 
 
 
@@ -18,10 +19,19 @@ def news_detail(request, word):
 
 
 def news_list(request):
+    #login check start
+    if not request.user.is_authenticated:
+        return redirect('mylogin')
+    #login check end
+    
     news=News.objects.all()
     return render(request,'back/news_list.html',{'news':news})
 
 def add_news(request):
+     #login check start
+    if not request.user.is_authenticated:
+        return redirect('mylogin')
+    #login check end
     cat = SubCat.objects.all()
     date=datetime.datetime.now()
     year=date.year
@@ -63,7 +73,12 @@ def add_news(request):
             if str(myfile.content_type).startswith('image'):
                 if myfile.size<5000000:
                     newsname = SubCat.objects.get(pk=newsid).name
-                    b=News(name=newstitle.title(), catname=newsname,catid=newsid, desc=newsdesc, txt_body=newstxt, date=today,time=time, picurl=url, picname=filename, writer='-', views=0)
+                    ocatid = SubCat.objects.get(pk=newsid).catid
+                    b=News(name=newstitle.title(), catname=newsname,catid=newsid, desc=newsdesc, txt_body=newstxt, date=today,time=time, picurl=url,ocatid=ocatid, picname=filename, writer='-', views=0)
+                    b.save()
+                    count=len(News.objects.filter(ocatid=ocatid))
+                    b=Cat.objects.get(pk=ocatid)
+                    b.count=count
                     b.save()
                     return redirect('news_list')
                 else:
@@ -80,18 +95,35 @@ def add_news(request):
             error='Please Input Your Image'
             return render(request,'back/error.html',{'error':error})
     return render(request,'back/add_news.html',{'cat':cat})
+    
 def delete_news(request,pk):
     try:
-        b=News.objects.get(pk=pk)
-        fs=FileSystemStorage()
+        b = News.objects.get(pk=pk)
+
+        fs = FileSystemStorage()
         fs.delete(b.picname)
+
+        ocatid = News.objects.get(pk=pk).ocatid
+
         b.delete()
+
+        
+        count = len(News.objects.filter(ocatid=ocatid))
+
+        m = Cat.objects.get(pk=ocatid)
+        m.count = count
+        m.save()
+        
     except:
         error='Something is wrong'
         return render(request,'back/error.html',{'error':error})
     return redirect(news_list)
 
 def edit_news(request,pk):
+     #login check start
+    if not request.user.is_authenticated:
+        return redirect('mylogin')
+    #login check end
     if len(News.objects.filter(pk=pk))==0:
         error='News Not Found'
         return render(request,'back/error.html',{'error':error})
