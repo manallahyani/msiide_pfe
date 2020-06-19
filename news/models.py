@@ -15,7 +15,7 @@ class News(models.Model):
     catid = models.IntegerField(default=0)
     ocatid = models.IntegerField(default=0)
 
-    views = models.IntegerField(default=0)
+    show = models.IntegerField(default=0)
     
     
     def __str__(self):
