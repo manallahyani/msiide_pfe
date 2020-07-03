@@ -16,6 +16,7 @@ class News(models.Model):
     ocatid = models.IntegerField(default=0)
 
     show = models.IntegerField(default=0)
+    tags = models.TextField(default="-")
     
     
     def __str__(self):

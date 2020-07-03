@@ -84,7 +84,7 @@
                                 {{i.txt_body|safe}}
 							</p>
 
-							{% endfor %}
+							
 						</br></br>
 							<!-- Share -->
 							<div class="flex-s-s">
@@ -155,11 +155,11 @@
 							</div>
 
 							<ul class="p-t-35">
-								{% for i in cat %}
-								{% if i.count != 0 %}
+								{% for cat in cat %}
+								{% if cat.count != 0 %}
 								<li class="how-bor3 p-rl-4">
 									<a href="#" class="dis-block f1-s-10 text-uppercase cl2 hov-cl10 trans-03 p-tb-13">
-										{{i.name}}({{i.count}})
+										{{cat.name}}({{cat.count}})
 									</a>
 								</li>
 								{% endif %}
@@ -180,21 +180,23 @@
 							</div>
 
 							<ul class="p-t-35">
+								{% for pop in popnews %}
+								{% if pop.ocatid == i.ocatid %}
 								<li class="flex-wr-sb-s p-b-30">
 									<a href="#" class="size-w-10 wrap-pic-w hov1 trans-03">
-										<img src="images/popular-post-04.jpg" alt="IMG">
+										<img src="{{pop.picurl}}" alt="IMG">
 									</a>
 
 									<div class="size-w-11">
 										<h6 class="p-b-4">
 											<a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">
-												Donec metus orci, malesuada et lectus vitae
+												{{pop.name}}
 											</a>
 										</h6>
 
 										<span class="cl8 txt-center p-b-24">
 											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												Music
+												{{pop.catname}}
 											</a>
 
 											<span class="f1-s-3 m-rl-3">
@@ -202,69 +204,15 @@
 											</span>
 
 											<span class="f1-s-3">
-												Feb 18
+												{{pop.date}}|{{pop.time}}
 											</span>
 										</span>
 									</div>
 								</li>
-
-								<li class="flex-wr-sb-s p-b-30">
-									<a href="#" class="size-w-10 wrap-pic-w hov1 trans-03">
-										<img src="images/popular-post-05.jpg" alt="IMG">
-									</a>
-
-									<div class="size-w-11">
-										<h6 class="p-b-4">
-											<a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">
-												Donec metus orci, malesuada et lectus vitae
-											</a>
-										</h6>
-
-										<span class="cl8 txt-center p-b-24">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												Game
-											</a>
-
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span class="f1-s-3">
-												Feb 16
-											</span>
-										</span>
-									</div>
-								</li>
-
-								<li class="flex-wr-sb-s p-b-30">
-									<a href="#" class="size-w-10 wrap-pic-w hov1 trans-03">
-										<img src="images/popular-post-06.jpg" alt="IMG">
-									</a>
-
-									<div class="size-w-11">
-										<h6 class="p-b-4">
-											<a href="blog-detail-02.html" class="f1-s-5 cl3 hov-cl10 trans-03">
-												Donec metus orci, malesuada et lectus vitae
-											</a>
-										</h6>
-
-										<span class="cl8 txt-center p-b-24">
-											<a href="#" class="f1-s-6 cl8 hov-cl10 trans-03">
-												Celebrity
-											</a>
-
-											<span class="f1-s-3 m-rl-3">
-												-
-											</span>
-
-											<span class="f1-s-3">
-												Feb 12
-											</span>
-										</span>
-									</div>
-								</li>
+								{% endif %}
+								{% endfor %}
 							</ul>
-						</div>
+						</div>{% endfor %}
 
 						<!-- Tag -->
 						<div>
@@ -275,37 +223,12 @@
 							</div>
 
 							<div class="flex-wr-s-s m-rl--5">
+								{% for tag in tag %}
 								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Fashion
+									{{tag}}
 								</a>
+								{% endfor %}
 
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Lifestyle
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Denim
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Streetstyle
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Crafts
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Magazine
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									News
-								</a>
-
-								<a href="#" class="flex-c-c size-h-2 bo-1-rad-20 bocl12 f1-s-1 cl8 hov-btn2 trans-03 p-rl-20 p-tb-5 m-all-5">
-									Blogs
-								</a>
 							</div>	
 						</div>
 					</div>

@@ -5,6 +5,7 @@ import datetime
 from django.core.files.storage import FileSystemStorage
 from subcat.models import SubCat
 from cat.models import Cat
+from trending.models import Trending
 
 
 
@@ -18,14 +19,18 @@ def news_detail(request, word):
     cat=Cat.objects.all()
     subcat= SubCat.objects.all()
     lastnews = News.objects.all().order_by('-pk')[:3]
-    popnews = News.objects.all().order_by('-show')
+    popnews = News.objects.all().order_by('-show')[:4]
     shownews = News.objects.filter(name=word)
+    tagname = News.objects.get(name=word).tags
+    tag = tagname.split(',')
+    popnews2 = News.objects.all().order_by('-show')[:3]
+    trend=Trending.objects.all().order_by('-pk')
   
     mynews=News.objects.get(name=word)
     mynews.show=mynews.show + 1
     mynews.save()
   
-    return render(request,'front/news_detail.html',{'news':news , 'site':site,'cat':cat,'subcat':subcat, 'lastnews':lastnews,'shownews':shownews})
+    return render(request,'front/news_detail.html',{'news':news , 'site':site,'cat':cat,'subcat':subcat, 'lastnews':lastnews,'shownews':shownews,'popnews':popnews,'popnews2':popnews2,'tag':tag, 'trend':trend})
 
 
 def news_list(request):
@@ -71,6 +76,7 @@ def add_news(request):
         newsdesc=request.POST.get('newsdesc')
         newstxt=request.POST.get('newstxt')
         newsid=request.POST.get('newscat')
+        tags=request.POST.get('tags')
 
         if newstitle=='' or newscat=='' or newsdesc=='' or newstxt=='':
             error='ALL FIELD REQUIED'
@@ -84,7 +90,7 @@ def add_news(request):
                 if myfile.size<5000000:
                     newsname = SubCat.objects.get(pk=newsid).name
                     ocatid = SubCat.objects.get(pk=newsid).catid
-                    b=News(name=newstitle.title(), catname=newsname,catid=newsid, desc=newsdesc, txt_body=newstxt, date=today,time=time, picurl=url,ocatid=ocatid, picname=filename, writer='-', show=0)
+                    b=News(name=newstitle.title(), catname=newsname,catid=newsid, desc=newsdesc.capitalize(), txt_body=newstxt.capitalize(), date=today,time=time, picurl=url,ocatid=ocatid, picname=filename, writer='-',tags=tags, show=0)
                     b.save()
                     count=len(News.objects.filter(ocatid=ocatid))
                     b=Cat.objects.get(pk=ocatid)
@@ -147,6 +153,7 @@ def edit_news(request,pk):
         newsdesc=request.POST.get('newsdesc')
         newstxt=request.POST.get('newstxt')
         newsid=request.POST.get('newscat')
+        tags=request.POST.get('tags')
 
         if newstitle=='' or newscat=='' or newsdesc=='' or newstxt=='':
             error='ALL FIELD REQUIED'
@@ -165,13 +172,14 @@ def edit_news(request,pk):
                     fss.delete(b.picname)
 
                     b.name=newstitle
-                    b.newsdesc=newsdesc
-                    b.newstxt=newstxt
+                    b.desc=newsdesc
+                    b.txt_body=newstxt
                     b.picname=filename
                     b.picurl=url
                     b.writer="-"
                     b.catname=newsname
                     b.catid=newsid
+                    b.tags=tags
                     b.save()
                     return redirect('news_list')
                 
@@ -194,10 +202,11 @@ def edit_news(request,pk):
 
             b=News.objects.get(pk=pk)
             b.name=newstitle
-            b.newsdesc=newsdesc
-            b.newstxt=newstxt
+            b.desc=newsdesc
+            b.txt_body=newstxt
             b.catname=newsname
             b.catid=newsid
+            b.tags=tags
         
             b.save()
             error='Your File Not Supported'

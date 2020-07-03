@@ -45,17 +45,12 @@
 							</span>
 
 							<span class="dis-inline-block cl16 slide100-txt pos-relative size-w-0" data-in="fadeInDown" data-out="fadeOutDown">
+								{% for trend in trend %}
 								<span class="dis-inline-block slide100-txt-item animated visible-false">
-									Interest rate angst trips up US equity bull market
+									{{trend.txt}}
 								</span>
+								{% endfor %}
 
-								<span class="dis-inline-block slide100-txt-item animated visible-false">
-									Designer fashion show kicks off Variety Week
-								</span>
-
-								<span class="dis-inline-block slide100-txt-item animated visible-false">
-									Microsoft quisque at ipsum vel orci eleifend ultrices
-								</span>
 							</span>
 						</div>
 					</div>
@@ -69,16 +64,16 @@
 								About
 							</a>
 
-							<a href="#" class="left-topbar-item">
+							<a href="/contact" class="left-topbar-item">
 								Contact
 							</a>
 
-							<a href="#" class="left-topbar-item">
-								Sing up
+							<a href="/login" class="left-topbar-item">
+								Sing up/Log in
 							</a>
 
 							<a href="#" class="left-topbar-item">
-								Log in
+								
 							</a>
 
 							<a href="#" class="left-topbar-item"></a>
@@ -292,59 +287,26 @@
 						</div>
 
 						<ul>
+
+							{% for pop in popnews2 %}
 							<li class="flex-wr-sb-s p-b-20">
 								<a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-									<img src="{% static 'front/images/popular-post-01.jpg' %}" alt="IMG">
+									<img src="{{pop.picurl}}" alt="IMG">
 								</a>
 
 								<div class="size-w-5">
 									<h6 class="p-b-5">
 										<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-											Donec metus orci, malesuada et lectus vitae
+											{{pop.catname}}
 										</a>
 									</h6>
 
 									<span class="f1-s-3 cl6">
-										Feb 17
+										{{pop.date}}|{{pop.time}}
 									</span>
 								</div>
 							</li>
-
-							<li class="flex-wr-sb-s p-b-20">
-								<a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-									<img src="{% static 'front/images/popular-post-02.jpg' %}" alt="IMG">
-								</a>
-
-								<div class="size-w-5">
-									<h6 class="p-b-5">
-										<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-											Lorem ipsum dolor sit amet, consectetur
-										</a>
-									</h6>
-
-									<span class="f1-s-3 cl6">
-										Feb 16
-									</span>
-								</div>
-							</li>
-
-							<li class="flex-wr-sb-s p-b-20">
-								<a href="#" class="size-w-4 wrap-pic-w hov1 trans-03">
-									<img src="{% static 'front/images/popular-post-03.jpg' %}" alt="IMG">
-								</a>
-
-								<div class="size-w-5">
-									<h6 class="p-b-5">
-										<a href="#" class="f1-s-5 cl11 hov-cl10 trans-03">
-											Suspendisse dictum enim quis imperdiet auctor
-										</a>
-									</h6>
-
-									<span class="f1-s-3 cl6">
-										Feb 15
-									</span>
-								</div>
-							</li>
+							{% endfor %}
 						</ul>
 					</div>
 

@@ -11,13 +11,13 @@ hello
                         <div class="content-header">
                             <div class="header-section">
                                 <h1>
-                                    <i class="fa fa-table"></i>Add News<br><small>You can add news here!</small>
+                                    <i class="fa fa-table"></i>Edit News<br><small>You can edit news here!</small>
                                 </h1>
                             </div>
                         </div>
                         <ul class="breadcrumb breadcrumb-top">
-                            <li>Add</li>
-                            <li><a href="/panel/news/add/">News</a></li>
+                            <li>Edit</li>
+                            <li><a href="/panel/news/edit/{{pk}}/">News</a></li>
                         </ul>
                         <!-- END Datatables Header -->
                         <div class="row">
@@ -27,7 +27,7 @@ hello
                                     <!-- Basic Form Elements Title -->
                                     <div class="block-title">
                                        
-                                        <h2><strong>Add</strong> News</h2>
+                                        <h2><strong>Edit</strong> News</h2>
                                     </div>
                                     <!-- END Form Elements Title -->
 
@@ -70,12 +70,16 @@ hello
                                         <div class="form-group">
                                             <div class="col-md-6">
                                                 <input id="myfile" name="myfile" value="" type="file" rows="4" class="form-control"  placeholder="No file Chosen"></input>
+                                            </br></br></br>
+                                            <textarea id="tags" name="tags" type="text" class="form-control" rows="6" placeholder="tags">{{news.tags}}</textarea>
                                             </div>
-                                            <div>
-                                                <img style="display: inline-block; width:300px; height:200px;" src="{{news.picurl}}" alt="avatar">
+                                            <div class="col-md-1"></div>
+                                            <div class="col-md-4">
+                                                <img style="display: inline-block; width:310px; height:210px;" src="{{news.picurl}}" alt="avatar">
                                             
                                             </div>
                                         </div>
+                                        
 
 
                                     <div class="form-group">
@@ -103,7 +107,7 @@ hello
                     {% block footerblock %}
                                     <!-- Load and execute javascript code used only in this page -->
                      
-                     <script src="{% static 'backjs/pages/tablesDatatables.js' %}"></script>
+                     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
         <script>$(function(){ TablesDatatables.init(); });</script>
 
 

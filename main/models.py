@@ -5,6 +5,7 @@ from django.db import models
 class Main(models.Model):
     name = models.CharField(max_length=40,default="-")
     about = models.TextField(default="-")
+    abouttxt=models.TextField(default="-")
     fb = models.CharField(max_length=40,default="-")
     tw = models.CharField(max_length=40,default="-")
     yt = models.CharField(max_length=40,default="-")

@@ -1,0 +1,104 @@
+
+{% extends 'back/master.html' %}
+{% load static %}
+
+                    {% block blockmain %}
+
+
+
+                    <div class="content-header">
+                        <div class="header-section">
+                            <h1>
+                                <i class="fa fa-table"></i>Group's Permissions<br><small>You can add, edit, delete your data here!</small>
+                            </h1>
+                        </div>
+                    </div>
+
+                   
+                    <!-- END Datatables Header -->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Basic Form Elements Block -->
+                            <div class="block">
+                                <!-- Basic Form Elements Title -->
+                                <div class="block-title">
+                                    <h2><strong>{{group}}</strong> Group's Permissions</h2>
+                                </div>
+                                <!-- END Form Elements Title -->
+
+                                <!-- Basic Form Elements Content -->
+                                <form action="{%url 'group_perms_add'  name=name %}" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" >
+                                    
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        
+                                            <div class="col-md-6">
+                                                <select id="pname" name="pname" class="select-chosen" data-placeholder="Choose a Category.." style="width: 250px;">
+                                                    <option></option><!-- Required for data-placeholder attribute to work with Chosen plugin -->
+                                                    {% for i in allperms %}
+                                                    <option value="{{i.name}}">{{i.name}}</option>
+                                                    {% endfor %}
+                                                  
+                                                </select>
+                                            </div>
+                                    
+                               
+                                    
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Enregistrer</button> 
+                                        </div>
+                                        
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                        <!-- Datatables Header -->
+                   
+                        <!-- END Datatables Header -->
+
+                          <!-- Datatables Content -->
+                          <div class="block full">
+                            <div class="block-title">
+                                <h2><strong>Group's Permissions</strong> List</h2>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table id="example-datatable" class="table table-vcenter table-condensed table-bordered">
+                                    <thead>
+                                        <tr>
+                                            
+                                            <th>Name</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for ii in perms %}
+                                        <tr>
+                                            
+                                            <td>{{ii.name}}</td>
+                                            <td class="text-center">
+                                                <div class="btn-group">
+                                                    <a href="{%url 'group_perms_del' gname=name name=ii.name %}" data-toggle="tooltip" title="Delete" class="btn btn-xs btn-danger"><i class="fa fa-times"></i>Delete</a>
+                                                </div>
+                                            </td>
+                                            
+                                        </tr>
+                                    {% endfor%}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- END Datatables Content -->
+                    
+                    <!-- END Page Content -->
+                                    {% endblock %}
+                    {% block footerblock %}
+                                    <!-- Load and execute javascript code used only in this page -->
+                     
+                     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
+        <script>$(function(){ TablesDatatables.init(); });</script>
+                    {% endblock%}
+                       
+                   

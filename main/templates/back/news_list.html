@@ -7,7 +7,7 @@
                         <div class="content-header">
                             <div class="header-section">
                                 <h1>
-                                    <i class="fa fa-table"></i>News List<br><small>You can add news here!</small>
+                                    <i class="fa fa-table"></i>News List<br><small></small>
                                 </h1>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                                             <td>{{i.date}}|{{i.time}}</td>
                                             <td>{{i.catname}}</td>
                                             <td>{{i.Writer}}</td>
-                                            <td><span class="label label-info">{{i.views}}</span></td>
+                                            <td><span class="label label-info">{{i.show}}</span></td>
                                             <td class="text-center">
                                                 <div class="btn-group">
                                                     <a href="{%url 'edit_news' pk=i.pk %}" data-toggle="tooltip" title="Edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i>Edit</a>
@@ -67,7 +67,7 @@
                     {% block footerblock %}
                                     <!-- Load and execute javascript code used only in this page -->
                      
-                     <script src="{% static 'backjs/pages/tablesDatatables.js' %}"></script>
+                     <script src="{% static 'back/js/pages/tablesDatatables.js' %}"></script>
         <script>$(function(){ TablesDatatables.init(); });</script>
                     {% endblock%}
                        
